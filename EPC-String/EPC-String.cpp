@@ -3,6 +3,9 @@
 
 #include <iostream>
 #include "String2.h"
+//#include "doctest.h"
+//#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
+
 
 int main()
 {
@@ -16,3 +19,18 @@ int main()
 	return 0;
 
 }
+
+/*
+
+
+TEST_CASE("VectorDoesNotChange") {
+
+	String2 test2("World");
+	String2 test3 = "Servus";
+	test3.append(test2);
+
+	CHECK_EQ("ServusWorld", test3.c_str());
+	
+}
+
+*/

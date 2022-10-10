@@ -8,11 +8,15 @@ public:
 
 	String2(const char* buffer);
 
+	void change(const String2* str);
+
 	void setString(const char* buffer);
 
 	String2(const String2& source);
 
 	void operator = (const char*);
+
+	String2 operator=(const String2& rhs);
 
 	void append(const String2& toAdd);
 
@@ -23,5 +27,8 @@ public:
 	void strcpy(char* destination, const char* source, int length);
 
 	~String2();
+
+	String2(String2&& other);
+
 };
 

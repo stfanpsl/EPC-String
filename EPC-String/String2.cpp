@@ -11,6 +11,14 @@ String2::String2(const char* buffer) {
 	this->setString(buffer);
 }
 
+//NEW --> Move Constructer
+String2::String2(String2&& other) {
+	this->str = other.str;
+	other.str = nullptr;
+}
+
+
+
 void String2::setString(const char* buffer) {
 	int i = 0;
 	int n = strlen(buffer);
@@ -21,6 +29,7 @@ void String2::setString(const char* buffer) {
 		str[i] = buffer[i]; //Copying from buffer to str
 	str[i] = '\0';
 }
+
 
 String2::String2(const String2& source) {
 	char* buffer = source.c_str();
@@ -53,6 +62,21 @@ void String2::operator = (const char* buffer) {
 	this->setString(buffer);
 }
 
+String2 String2::operator=(const String2& rhs) {
+	if (this != &rhs) {
+
+		// delete old data
+		if (this->str) {
+			delete[] this->str;
+		}
+
+		this->str = new char[rhs.length() + 1];
+		strcpy(this->str, rhs.str, rhs.length());
+	}
+
+	return *this;
+}
+
 
 void String2::append(const String2& toAdd) {
 
@@ -74,3 +98,9 @@ void String2::strcpy(char* destination, const char* source, int length) {
 	}
 }
 
+void String2::change(const String2* other)
+{
+	delete[] str;
+	str = new char[strlen(str) + 1];
+	strcpy(str, other->c_str(), other->length());
+}
