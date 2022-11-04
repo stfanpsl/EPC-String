@@ -17,7 +17,23 @@ String2::String2(String2&& other) {
 	other.str = nullptr;
 }
 
+// move assignment
+String2& String2::operator=(String2&& rhs) noexcept {
 
+	// self-asignment check
+	if (this != &rhs) {
+
+		// delete old data
+		if (this->str) {
+			delete[] this->str;
+		}
+
+		this->str = rhs.c_str();
+		rhs.str = nullptr;
+	}
+
+	return *this;
+}
 
 void String2::setString(const char* buffer) {
 	int i = 0;
@@ -40,9 +56,9 @@ char* String2::c_str() const {
 	return this->str;
 }
 
-String2::~String2() { 
-	
-	delete[] str; 
+String2::~String2() {
+
+	delete[] str;
 
 }
 
@@ -62,16 +78,10 @@ void String2::operator = (const char* buffer) {
 	this->setString(buffer);
 }
 
+//copy assignment
 String2 String2::operator=(const String2& rhs) {
 	if (this != &rhs) {
-
-		// delete old data
-		if (this->str) {
-			delete[] this->str;
-		}
-
-		this->str = new char[rhs.length() + 1];
-		strcpy(this->str, rhs.str, rhs.length());
+		this->setString(rhs.c_str());
 	}
 
 	return *this;
@@ -98,9 +108,65 @@ void String2::strcpy(char* destination, const char* source, int length) {
 	}
 }
 
-void String2::change(const String2* other)
+String2& String2::operator+=(const String2& _other)
 {
-	delete[] str;
-	str = new char[strlen(str) + 1];
-	strcpy(str, other->c_str(), other->length());
+	if (this != &_other)
+	{
+		auto totalLength = this->length() + _other.length();
+		char* buffer = new char[totalLength + 1];
+
+		std::copy(str, str + this->length(), buffer);
+		std::copy(_other.str, _other.str + _other.length(), buffer + this->length());
+		buffer[totalLength] = '\0';
+
+		std::swap(str, buffer);
+
+
+		delete[] buffer;
+	}
+
+	return *this;
+}
+
+
+String2& String2::operator+=(const char* _other)
+{
+	const auto charLength = strlen(_other);
+	const auto totalLength = this->length() + charLength;
+	char* buffer = new char[totalLength + 1];
+
+	std::copy(str, str + this->length(), buffer);
+	std::copy(_other, _other + charLength, buffer + this->length());
+	buffer[totalLength] = '\0';
+
+	std::swap(str, buffer);
+
+	delete[] buffer;
+
+	return *this;
+}
+
+String2 String2::operator+(const String2& _other) const
+{
+	const auto totalLength = this->length() + _other.length();
+	char* buffer = new char[totalLength + 1];
+
+	std::copy(str, str + this->length(), buffer);
+	std::copy(_other.str, _other.str + _other.length(), buffer + this->length());
+	buffer[totalLength] = '\0';
+
+	return String2(buffer);
+}
+
+String2 String2::operator+(const char* _other) const
+{
+	const auto charLength = strlen(_other);
+	const auto totalLength = this->length() + charLength;
+	char* buffer = new char[totalLength + 1];
+
+	std::copy(str, str + this->length(), buffer);
+	std::copy(_other, _other + charLength, buffer + this->length());
+	buffer[totalLength] = '\0';
+
+	return String2(buffer);
 }

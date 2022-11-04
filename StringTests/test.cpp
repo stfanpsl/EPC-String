@@ -8,8 +8,8 @@
 
 TEST(StringTest, StringHatKorrekteLänge) {
 	String2 test("World");
-	
-	EXPECT_EQ(5,test.length());
+
+	EXPECT_EQ(5, test.length());
 }
 
 TEST(StringTest, StringWirdAngelegt) {

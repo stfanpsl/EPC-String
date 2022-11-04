@@ -8,7 +8,9 @@ public:
 
 	String2(const char* buffer);
 
-	void change(const String2* str);
+	String2& operator=(String2&& rhs) noexcept;
+
+	operator char* () const { return str; }
 
 	void setString(const char* buffer);
 
@@ -25,6 +27,14 @@ public:
 	int length() const;
 
 	void strcpy(char* destination, const char* source, int length);
+
+	String2& operator+=(const String2& _other);
+
+	String2& operator+=(const char* _other);
+
+	String2 operator+(const String2& _other) const;
+
+	String2 operator+(const char* _other) const;
 
 	~String2();
 
