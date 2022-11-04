@@ -18,7 +18,7 @@ int main()
 	String2 s5 = std::move(testString1);
 	String2 Test;
 	Test = std::move(s5);
-	
+
 
 	String2 s1("Hello");
 	const String2 s2("World");
@@ -28,14 +28,17 @@ int main()
 	const String2 s4 = s3 + "World"; //std::cout << s4.c_str() << std::endl;
 	puts(s4);
 
-
+	const String2 testString1("Hello");
+	String2 testString2("Hello");
+	String2 copyString(testString1);
+	testString2 = testString1;
+	std::cout << copyString.c_str();
+	*/
 
 	// Iteratoren
-	const String test("Hello World");
-	for (String::Iterator it = test.begin(); it != test.end(); ++it){ std::cout << *it << '\n';}
-	std::cout << (std::find(test.begin(), test.end(), 'W') != test.end()) << '\n';
 
-	*/
+
+
 
 
 	return 0;
