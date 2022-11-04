@@ -3,9 +3,6 @@
 #include "../EPC-String/String2.h"
 
 
-//NEXT STEPS: https://www.codementor.io/@sandesh87/the-rule-of-five-in-c-1pdgpzb04f
-
-
 TEST(StringTest, StringHatKorrekteLänge) {
 	String2 test("World");
 
@@ -33,9 +30,9 @@ TEST(StringTest, StringWirdAppended) {
 }
 
 TEST(StringTest, StringCopyOperator) {
-	String2 testString1("Hello");
-	const String2 testString2("Hello");
+	const String2 testString1("Hello");
+	String2 testString2("Hello");
 	String2 copyString(testString1);
-	//testString2 = testString1;
+	testString2 = testString1;
 	std::cout << copyString.c_str();
 }

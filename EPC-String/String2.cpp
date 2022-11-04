@@ -11,8 +11,8 @@ String2::String2(const char* buffer) {
 	this->setString(buffer);
 }
 
-//NEW --> Move Constructer
-String2::String2(String2&& other) {
+// Move Constructer
+String2::String2(String2&& other) noexcept {
 	this->str = other.str;
 	other.str = nullptr;
 }

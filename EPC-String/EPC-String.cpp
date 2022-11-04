@@ -18,15 +18,25 @@ int main()
 	String2 s5 = std::move(testString1);
 	String2 Test;
 	Test = std::move(s5);
-	*/
+	
 
 	String2 s1("Hello");
 	const String2 s2("World");
 	//s1 += s2; std::cout << s1.c_str() << std::endl;
 	String2 s3 = s1 + s2;
 	//s3 += "Hello"; std::cout << s3.c_str() << std::endl;
-	const String2 s4 = s3 + "World"; std::cout << s4.c_str() << std::endl;
+	const String2 s4 = s3 + "World"; //std::cout << s4.c_str() << std::endl;
 	puts(s4);
+
+
+
+	// Iteratoren
+	const String test("Hello World");
+	for (String::Iterator it = test.begin(); it != test.end(); ++it){ std::cout << *it << '\n';}
+	std::cout << (std::find(test.begin(), test.end(), 'W') != test.end()) << '\n';
+
+	*/
+
 
 	return 0;
 
